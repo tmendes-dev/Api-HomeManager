@@ -1,6 +1,7 @@
 using Api_HomeManager.AppConfig;
 using Domain.Aggregate;
 using HealthChecks.UI.Client;
+using Infra;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;

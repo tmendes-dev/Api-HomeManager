@@ -9,12 +9,13 @@ namespace Api_HomeManager.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ShopListController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ProductController : ControllerBase
     {
-        private readonly IShopListService _service;
-        private readonly ILogger<ShopListController> _logger;
+        private readonly IProductService _service;
+        private readonly ILogger<ProductController> _logger;
 
-        public ShopListController(IShopListService service, ILogger<ShopListController> logger)
+        public ProductController(IProductService service, ILogger<ProductController> logger)
         {
             _service = service;
             _logger = logger;
