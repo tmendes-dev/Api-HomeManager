@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,8 @@ namespace Api_HomeManager
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api_HomeManager", Version = "v1" });
             });
+            services.AddHealthChecks();
+            services.AddHealthChecksUI().AddInMemoryStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +47,19 @@ namespace Api_HomeManager
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api_HomeManager v1"));
             }
+
+            // Gera o endpoint que retornará os dados utilizados no dashboard
+            app.UseHealthChecks("/healthchecks-data-ui", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            // Ativa o dashboard para a visualização da situação de cada Health Check
+            app.UseHealthChecksUI(options =>
+            {
+                options.UIPath = "/monitor";
+            });
 
             app.UseHttpsRedirection();
 
