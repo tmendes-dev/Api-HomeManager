@@ -13,8 +13,7 @@
 
 :house_with_garden: I’m from Brazil.
 
-:books: In this project my objective is to create an API for home manegement easier, with features for shopping list, 
-chores, contacts list, chat with members of the family and more.
+:books: In this project my goal is to create an API to make managing the house easier, with functionalities for shopping list, household tasks, contact list, chat with family members and much more.
 
 :outbox_tray: 2021 Goals: improve my skills as a professional Developer.
 
